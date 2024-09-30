@@ -7,7 +7,7 @@ public class Plataforma : MonoBehaviour
     [SerializeField] float direccion ;
     [SerializeField] float fuerza ;
     [SerializeField] float contador = 10;
-    bool dire;
+    bool dire = true;
     Vector3 movimiento = new Vector3(1, 0, 0);
 
     void Start()
@@ -37,14 +37,13 @@ public class Plataforma : MonoBehaviour
         }
 
 
-        if (dire = true && contador <= 0)
+        if (dire == true && contador <= 0)
         {
             direccion = 1;
-            contador = 10;
             dire = false;
+            contador = 10;
         }
-
-        if (dire = false && contador <= 0)
+        else if (dire == false && contador <= 0)
         {
             direccion = 0;
             dire = true;
