@@ -4,15 +4,19 @@ using UnityEngine;
 
 public class Plataforma : MonoBehaviour
 {
-    [SerializeField] float direccion ;
+    //[SerializeField] float direccion ;
     [SerializeField] float fuerza ;
-    [SerializeField] float contador = 10;
-    bool dire = true;
-    Vector3 movimiento = new Vector3(1, 0, 0);
+    [SerializeField] float tiempoReinicio;
+    [SerializeField] Vector3 direccion;
+    [SerializeField] Vector3 rotacion;
 
+
+    float contador;
+    bool dire = true;
+    
     void Start()
     {
-        
+        contador = tiempoReinicio ;
 
 
     }
@@ -25,29 +29,44 @@ public class Plataforma : MonoBehaviour
             contador -= Time.deltaTime;
         }
 
-
-        if (direccion == 0)
+        if (dire == true)
         {
-            transform.Translate((movimiento) * Time.deltaTime * fuerza);
+            transform.Translate((direccion) * Time.deltaTime * fuerza, Space.World);
         }
-        else if (direccion == 1) 
+        else if (dire == false)
         {
-            transform.Translate((-movimiento)* Time.deltaTime * fuerza);
+            transform.Translate((-direccion) * Time.deltaTime * fuerza, Space.World);
 
         }
 
+        if (dire == true)
+        {
+            transform.Rotate((rotacion) * Time.deltaTime * fuerza, Space.World);
+        }
+        else if (dire == false)
+        {
+            transform.Rotate((-rotacion) * Time.deltaTime * fuerza, Space.World);
+
+        }
 
         if (dire == true && contador <= 0)
         {
-            direccion = 1;
+
             dire = false;
-            contador = 10;
+            contador = tiempoReinicio;
         }
         else if (dire == false && contador <= 0)
         {
-            direccion = 0;
+
             dire = true;
-            contador = 10;
+            contador = tiempoReinicio;
         }
+
+
+
+
+
+
+
     }
 }
