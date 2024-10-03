@@ -5,7 +5,8 @@ using UnityEngine;
 public class Plataforma : MonoBehaviour
 {
     //[SerializeField] float direccion ;
-    [SerializeField] float fuerza ;
+    [SerializeField] float fuerzaMov ;
+    [SerializeField] float fuerzaRot;
     [SerializeField] float tiempoReinicio;
     [SerializeField] Vector3 direccion;
     [SerializeField] Vector3 rotacion;
@@ -31,21 +32,21 @@ public class Plataforma : MonoBehaviour
 
         if (dire == true)
         {
-            transform.Translate((direccion) * Time.deltaTime * fuerza, Space.World);
+            transform.Translate((direccion) * Time.deltaTime * fuerzaMov, Space.World);
         }
         else if (dire == false)
         {
-            transform.Translate((-direccion) * Time.deltaTime * fuerza, Space.World);
+            transform.Translate((-direccion) * Time.deltaTime * fuerzaMov, Space.World);
 
         }
 
         if (dire == true)
         {
-            transform.Rotate((rotacion) * Time.deltaTime * fuerza, Space.World);
+            transform.Rotate((rotacion) * Time.deltaTime * fuerzaRot, Space.World);
         }
         else if (dire == false)
         {
-            transform.Rotate((-rotacion) * Time.deltaTime * fuerza, Space.World);
+            transform.Rotate((-rotacion) * Time.deltaTime * fuerzaRot, Space.World);
 
         }
 
