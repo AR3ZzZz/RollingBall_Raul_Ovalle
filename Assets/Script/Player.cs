@@ -7,21 +7,29 @@ public class Player : MonoBehaviour
     [SerializeField] int fuerzaSalto;
     [SerializeField] int fuerzaMov;
     Rigidbody rb;
+    float h;
+    float v;
+    Vector3 Inicio;
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-
+        Inicio = gameObject.transform.position;
     }
 
     void Update()
     {
-        float h = Input.GetAxisRaw("Horizontal");
-        float v = Input.GetAxisRaw("Vertical");
+        h = Input.GetAxisRaw("Horizontal");
+        v = Input.GetAxisRaw("Vertical");
 
-        rb.AddForce(new Vector3(h,0,v).normalized * fuerzaMov, ForceMode.Force);
+       
 
         Salto();
 
+    }
+
+    private void FixedUpdate()
+    {
+        rb.AddForce(new Vector3(h, 0, v).normalized * fuerzaMov, ForceMode.Force);
     }
 
     void Salto()
@@ -29,6 +37,20 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             rb.AddForce(new Vector3(0, 1, 0) * fuerzaSalto, ForceMode.Impulse);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Coleccionable")) 
+        {
+         Destroy(other.gameObject);    
+        }
+        if (other.CompareTag("Vacio"))
+        {
+            rb.isKinematic = true;
+            gameObject.transform.position = Inicio;
+            rb.isKinematic = false;
         }
     }
 
