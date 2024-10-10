@@ -1,15 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+
 
 public class Player : MonoBehaviour
 {
     [SerializeField] int fuerzaSalto;
     [SerializeField] int fuerzaMov;
+    [SerializeField] TMP_Text puntosText;
+    int puntos;
     Rigidbody rb;
     float h;
     float v;
     Vector3 Inicio;
+    
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -44,6 +50,8 @@ public class Player : MonoBehaviour
     {
         if (other.CompareTag("Coleccionable")) 
         {
+         puntos += 3;
+         puntosText.SetText("Score: " + puntos);
          Destroy(other.gameObject);    
         }
         if (other.CompareTag("Vacio"))

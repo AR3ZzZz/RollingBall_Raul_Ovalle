@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Plataforma : MonoBehaviour
 {
@@ -62,12 +63,13 @@ public class Plataforma : MonoBehaviour
             dire = true;
             contador = tiempoReinicio;
         }
+        
 
 
-
-
+        
 
 
 
     }
+    
 }
