@@ -10,12 +10,15 @@ public class Player : MonoBehaviour
     [SerializeField] int fuerzaMov;
     [SerializeField] TMP_Text puntosText;
     [SerializeField] Vector3 Direccion;
+    [SerializeField] float distanciaRayo;
     int puntos;
     Rigidbody rb;
     float h;
     float v;
     Vector3 Inicio;
-    int saltosPosibles = 0;
+    //int saltosPosibles = 0;
+    
+
     
 
     void Start()
@@ -33,7 +36,10 @@ public class Player : MonoBehaviour
 
        
 
-        Salto();
+        if (DetectaSuelo())
+        {
+            Salto();
+        }
 
     }
 
@@ -44,10 +50,10 @@ public class Player : MonoBehaviour
 
     void Salto()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && saltosPosibles > 0 )
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             rb.AddForce(new Vector3(0, 1, 0) * fuerzaSalto, ForceMode.Impulse);
-            saltosPosibles--;   
+            
         }
     }
 
@@ -68,16 +74,22 @@ public class Player : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Suelo"))
-        {
-            if (saltosPosibles < 1)
-            {
-                saltosPosibles++;
-            }
-            Debug.Log(saltosPosibles);
+        //if (collision.gameObject.CompareTag("Suelo"))
+        //{
+        //    if (saltosPosibles < 1)
+        //    {
+        //        saltosPosibles++;
+        //    }
+        //    Debug.Log(saltosPosibles);
 
 
-        }
+        //}
+    }
+
+    bool DetectaSuelo()
+    {
+        bool detectaSuelo = Physics.Raycast(gameObject.transform.position, Vector3.down, distanciaRayo);
+        return detectaSuelo;
     }
 
 }
