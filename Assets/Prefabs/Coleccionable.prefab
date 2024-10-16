@@ -52,6 +52,9 @@ MonoBehaviour:
   tiempoReinicio: 3
   direccion: {x: 0, y: 1, z: 0}
   rotacion: {x: 0, y: 1, z: 0}
+  audioManager: {fileID: 3102557406020129778, guid: e5ca173a8ee620540b56a2c17ac9691a,
+    type: 3}
+  sonidoPuntos: {fileID: 8300000, guid: 0c4cc3d538f673b41ac73f5cf2ebb324, type: 3}
 --- !u!33 &79836599513812555
 MeshFilter:
   m_ObjectHideFlags: 0

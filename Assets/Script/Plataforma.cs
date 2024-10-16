@@ -11,6 +11,8 @@ public class Plataforma : MonoBehaviour
     [SerializeField] float tiempoReinicio;
     [SerializeField] Vector3 direccion;
     [SerializeField] Vector3 rotacion;
+    [SerializeField] AudioManager audioManager;
+    [SerializeField] AudioClip sonidoPuntos;
 
 
     float contador;
@@ -64,12 +66,14 @@ public class Plataforma : MonoBehaviour
             contador = tiempoReinicio;
         }
         
-
-
-        
-
-
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player")) 
+        {
+            audioManager.ReproducirSonido(sonidoPuntos);
+        }
 
     }
-    
+
 }
