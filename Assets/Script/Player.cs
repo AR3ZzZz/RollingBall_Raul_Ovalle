@@ -52,7 +52,7 @@ public class Player : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            rb.AddForce(new Vector3(0, 1, 0) * fuerzaSalto, ForceMode.Impulse);
+            rb.AddForce(new Vector3(0, 1, 0) * fuerzaSalto, ForceMode.VelocityChange);
             
         }
     }
@@ -89,6 +89,7 @@ public class Player : MonoBehaviour
     bool DetectaSuelo()
     {
         bool detectaSuelo = Physics.Raycast(gameObject.transform.position, Vector3.down, distanciaRayo);
+        Debug.DrawRay(gameObject.transform.position, Vector3.down, Color.red, 1f);
         return detectaSuelo;
     }
 
