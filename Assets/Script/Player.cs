@@ -7,6 +7,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     [SerializeField] int fuerzaSalto;
+    [SerializeField] int fuerzaPad;
     [SerializeField] int fuerzaMov;
     [SerializeField] TMP_Text puntosText;
     [SerializeField] Vector3 Direccion;
@@ -74,16 +75,10 @@ public class Player : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
-        //if (collision.gameObject.CompareTag("Suelo"))
-        //{
-        //    if (saltosPosibles < 1)
-        //    {
-        //        saltosPosibles++;
-        //    }
-        //    Debug.Log(saltosPosibles);
-
-
-        //}
+        if (collision.gameObject.CompareTag("JumpPad"))
+        {
+            rb.AddForce(new Vector3(0, 1, 0) * fuerzaPad, ForceMode.VelocityChange);
+        }
     }
 
     bool DetectaSuelo()

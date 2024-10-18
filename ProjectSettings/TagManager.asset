@@ -8,6 +8,7 @@ TagManager:
   - Vacio
   - Suelo
   - Camara
+  - JumpPad
   layers:
   - Default
   - TransparentFX
