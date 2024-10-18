@@ -7,9 +7,11 @@ public class Enemigo : MonoBehaviour
 {
     [SerializeField] Transform target;
     [SerializeField] float minDistance;
+    [SerializeField] GameObject bala;
+    [SerializeField] float spawnBala;
     float timer = 0;
 
-   
+
     void Start()
     {
         
@@ -23,19 +25,22 @@ public class Enemigo : MonoBehaviour
             if (timer < 0)
             {
                 Debug.Log("Piu");
+                Debug.Log(transform.eulerAngles);
+                GameObject clon;
+                clon = Instantiate(bala, transform.position + Vector3.forward * spawnBala, transform.rotation * Quaternion.Euler(1,5,1));
                 timer = Random.Range(3, 7);
             }
             else
             {
                 timer -= Time.deltaTime;
             }
-            
+
 
         }
-        
+
     }
 
-    bool EnRango()
+    public bool EnRango()
     {
         float distance = Vector3.Distance(transform.position, target.position);
 
