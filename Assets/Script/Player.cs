@@ -12,13 +12,23 @@ public class Player : MonoBehaviour
     [SerializeField] TMP_Text puntosText;
     [SerializeField] Vector3 Direccion;
     [SerializeField] float distanciaRayo;
+    [SerializeField] float slowDuration;
+    [SerializeField] float speedDuration;
+
     int puntos;
+
     Rigidbody rb;
+
     float h;
-    float v;
+    float v;    
+
     Vector3 Inicio;
-    //int saltosPosibles = 0;
+
+    bool slow = false;
+    bool speedX2 = false;
     
+    float timerSlow;
+    float timerSpeed;
 
     
 
@@ -26,15 +36,29 @@ public class Player : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         Inicio = gameObject.transform.position;
-        rb.AddForce(Direccion * fuerzaMov, ForceMode.VelocityChange);
+        //rb.AddForce(Direccion * fuerzaMov, ForceMode.VelocityChange);
 
     }
 
     void Update()
     {
-       // h = Input.GetAxisRaw("Horizontal");
-       // v = Input.GetAxisRaw("Vertical");
+        h = Input.GetAxisRaw("Horizontal");
+        v = Input.GetAxisRaw("Vertical");
+       
+        if (slow)
+        {
+            timerSlow -= Time.deltaTime;
+            if (timerSlow < 0)
+            {
+                slow = false;
+                Time.timeScale = 1.0f;
 
+            }
+        }
+        if (speedX2)
+        {
+            timerSpeed -= Time.deltaTime;
+        }
        
 
         if (DetectaSuelo())
@@ -46,13 +70,22 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
-        //rb.AddForce(new Vector3(h, 0, v).normalized * fuerzaMov, ForceMode.Force);
+        if (speedX2)
+        {
+            rb.AddForce(new Vector3(h, 0, v).normalized * fuerzaMov * 2, ForceMode.Acceleration);
+        }
+        else
+        {
+            rb.AddForce(new Vector3(h, 0, v).normalized * fuerzaMov, ForceMode.Acceleration);
+        }
+
     }
 
     void Salto()
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
+            
             rb.AddForce(new Vector3(0, 1, 0) * fuerzaSalto, ForceMode.VelocityChange);
             
         }
@@ -71,6 +104,21 @@ public class Player : MonoBehaviour
             rb.isKinematic = true;
             gameObject.transform.position = Inicio;
             rb.isKinematic = false;
+        }
+        if (other.CompareTag("BoostSlow"))
+        {
+            Time.timeScale = 0.5f;
+            slow = true;
+            timerSlow = slowDuration;
+            Debug.Log(slow);
+            Destroy(other.gameObject);
+        }
+        if (other.CompareTag("BoostSpeed"))
+        {
+            speedX2 = true;
+            timerSpeed = speedDuration;
+
+            Destroy(other.gameObject);
         }
     }
     private void OnCollisionEnter(Collision collision)

@@ -9,6 +9,8 @@ TagManager:
   - Suelo
   - Camara
   - JumpPad
+  - BoostSlow
+  - BoostSpeed
   layers:
   - Default
   - TransparentFX
