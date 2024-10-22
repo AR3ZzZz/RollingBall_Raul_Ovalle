@@ -27,7 +27,7 @@ public class Enemigo : MonoBehaviour
                 Debug.Log("Piu");
                 Debug.Log(transform.eulerAngles);
                 GameObject clon;
-                clon = Instantiate(bala, transform.position + Vector3.forward * spawnBala, transform.rotation * Quaternion.Euler(1,5,1));
+                clon = Instantiate(bala, transform.position + Vector3.forward * spawnBala, transform.rotation * Quaternion.Euler(0,0,0));
                 timer = Random.Range(3, 7);
             }
             else
