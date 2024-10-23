@@ -8,6 +8,7 @@ public class Enemigo : MonoBehaviour
     [SerializeField] Transform target;
     [SerializeField] float minDistance;
     [SerializeField] GameObject bala;
+    [SerializeField] GameObject cannon;
     [SerializeField] float spawnBala;
     float timer = 0;
 
@@ -29,7 +30,8 @@ public class Enemigo : MonoBehaviour
                 //Vector3 direccion = target.position - transform.position;
                 //Quaternion targetRotation = Quaternion.LookRotation(direccion);
                 GameObject clon;
-                clon = Instantiate(bala, transform.position + Vector3.forward * spawnBala, transform.rotation * Quaternion.Euler(0,55,0));
+                clon = Instantiate(bala, cannon.transform.position, cannon.transform.rotation);
+                Debug.Break();
                 timer = Random.Range(3, 7);
             }
             else
