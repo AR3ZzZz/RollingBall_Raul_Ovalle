@@ -10,28 +10,24 @@ public class Enemigo : MonoBehaviour
     [SerializeField] GameObject bala;
     [SerializeField] GameObject cannon;
     [SerializeField] float spawnBala;
+    
     float timer = 0;
 
+    
 
     void Start()
     {
         
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (EnRango())
         {
             if (timer < 0)
             {
-                Debug.Log("Piu");
-                Debug.Log(transform.eulerAngles);
-                //Vector3 direccion = target.position - transform.position;
-                //Quaternion targetRotation = Quaternion.LookRotation(direccion);
                 GameObject clon;
                 clon = Instantiate(bala, cannon.transform.position, cannon.transform.rotation);
-                Debug.Break();
                 timer = Random.Range(3, 7);
             }
             else
@@ -50,6 +46,7 @@ public class Enemigo : MonoBehaviour
 
         if (distance < minDistance && target != null)
         {
+
             transform.LookAt(target);
             bool dentroDeRango = true;
             return dentroDeRango;
@@ -59,6 +56,7 @@ public class Enemigo : MonoBehaviour
             return false;
         }
     }
+
 
     private void OnDrawGizmosSelected()
     {
