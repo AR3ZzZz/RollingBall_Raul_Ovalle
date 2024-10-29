@@ -8,17 +8,23 @@ public class Boss : MonoBehaviour
     [SerializeField] Transform target;
     [SerializeField] bool batalla = true;
     [SerializeField] float smooth;
+    [SerializeField] float distanciaRayo;
+
     private Vector3 currentVelocity;
+    Vector3 rayOrigin;
+    Vector3 rayDirection;
 
     public bool Batalla { get => batalla; set => batalla = value; }
 
     void Start()
     {
-        
+
     }
 
     void Update()
     {
+        RayoBoss();
+
         if (batalla)
         {
             if (DisparoActivo())
@@ -27,7 +33,7 @@ public class Boss : MonoBehaviour
 
             }
         }
-        
+
     }
     public bool DisparoActivo()
     {
@@ -48,7 +54,7 @@ public class Boss : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player")) 
+        if (other.CompareTag("Player"))
         {
             batalla = true;
         }
@@ -58,5 +64,17 @@ public class Boss : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, minDistance);
+    }
+
+    void RayoBoss()
+    {
+        if (Physics.Raycast(rayOrigin, rayDirection, out RaycastHit hitInfo, distanciaRayo))
+        {
+            if (hitInfo.collider.name == "Player")
+            {
+                Debug.Log("PlayerHit");
+            }
+        }
+        Debug.DrawRay(rayOrigin, rayDirection * distanciaRayo, Color.red);
     }
 }

@@ -5,7 +5,6 @@ using UnityEngine;
 public class Proyectil : MonoBehaviour
 {
     [SerializeField] float velocidad;
-    [SerializeField] GameObject player;
     
     void Start()
     {
