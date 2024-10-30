@@ -11,10 +11,10 @@ public class Boss : MonoBehaviour
     [SerializeField] float smooth;
 
     [Header("RayoBoss")]
-    LineRenderer lineRenderer;
     [SerializeField] float distanciaRayo;
-    [SerializeField] Vector3 rayOrigin;
+    [SerializeField] Transform rayOrigin;
     [SerializeField] Vector3 rayDirection;
+     LineRenderer lineRenderer;
 
     
     private Vector3 currentVelocity;
@@ -26,8 +26,11 @@ public class Boss : MonoBehaviour
         lineRenderer = GetComponent<LineRenderer>();
 
         lineRenderer.positionCount = 2;
-        lineRenderer.startWidth = 0.05f;
-        lineRenderer.endWidth = 0.05f;
+        lineRenderer.startWidth = 0.5f;
+        lineRenderer.endWidth = 0.5f;
+        lineRenderer.material.color = Color.red;
+        lineRenderer.enabled = true;
+
     }
 
     void Update()
@@ -77,13 +80,12 @@ public class Boss : MonoBehaviour
 
     void RayoBoss()
     {
-        if (Physics.Raycast(rayOrigin, rayDirection, out RaycastHit hitInfo, distanciaRayo))
-        {
-            if (hitInfo.collider.name == "Player")
-            {
+        if (Physics.Raycast(rayOrigin.position, rayDirection, out RaycastHit hitInfo, distanciaRayo))
+        {                       
+                Debug.Log("Rayo alcanzó: " + hitInfo.collider.name);
                 Debug.Log("PlayerHit");
-            }
+            
         }
-        Debug.DrawRay(rayOrigin, rayDirection * distanciaRayo, Color.red);
+        Debug.DrawRay(rayOrigin.position, rayDirection * distanciaRayo, Color.green);
     }
 }

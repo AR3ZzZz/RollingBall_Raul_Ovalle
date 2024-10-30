@@ -8,7 +8,7 @@ public class Proyectil : MonoBehaviour
     
     void Start()
     {
-        Debug.Break();
+
     }
 
     // Update is called once per frame
