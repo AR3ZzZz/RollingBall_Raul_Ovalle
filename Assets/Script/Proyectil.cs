@@ -8,12 +8,12 @@ public class Proyectil : MonoBehaviour
     
     void Start()
     {
-         
+        Debug.Break();
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(transform.right * velocidad * Time.deltaTime);
+        transform.position += (transform.right * velocidad * Time.deltaTime);
     }
 }
