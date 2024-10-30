@@ -4,21 +4,30 @@ using UnityEngine;
 
 public class Boss : MonoBehaviour
 {
+    [Header("Targeteo")]
     [SerializeField] float minDistance;
     [SerializeField] Transform target;
     [SerializeField] bool batalla = true;
     [SerializeField] float smooth;
-    [SerializeField] float distanciaRayo;
 
+    [Header("RayoBoss")]
+    LineRenderer lineRenderer;
+    [SerializeField] float distanciaRayo;
+    [SerializeField] Vector3 rayOrigin;
+    [SerializeField] Vector3 rayDirection;
+
+    
     private Vector3 currentVelocity;
-    Vector3 rayOrigin;
-    Vector3 rayDirection;
 
     public bool Batalla { get => batalla; set => batalla = value; }
 
     void Start()
     {
+        lineRenderer = GetComponent<LineRenderer>();
 
+        lineRenderer.positionCount = 2;
+        lineRenderer.startWidth = 0.05f;
+        lineRenderer.endWidth = 0.05f;
     }
 
     void Update()
