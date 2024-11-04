@@ -13,7 +13,6 @@ public class Boss : MonoBehaviour
     [Header("RayoBoss")]
     [SerializeField] float distanciaRayo;
     [SerializeField] Transform rayOrigin;
-    [SerializeField] Vector3 rayDirection;
      LineRenderer lineRenderer;
 
     
@@ -30,21 +29,22 @@ public class Boss : MonoBehaviour
         lineRenderer.endWidth = 0.5f;
         lineRenderer.material.color = Color.red;
         lineRenderer.enabled = true;
-
+        lineRenderer.SetPosition(0, transform.position);
     }
 
     void Update()
     {
-        RayoBoss();
+        DisparoActivo();
+        //RayoBoss();
 
-        if (batalla)
-        {
-            if (DisparoActivo())
-            {
+        //if (batalla)
+        //{
+        //    if (DisparoActivo())
+        //    {
 
 
-            }
-        }
+        //    }
+        //}
 
     }
     public bool DisparoActivo()
@@ -55,6 +55,7 @@ public class Boss : MonoBehaviour
         {
             Vector3 dirATarget = (target.transform.position - transform.position).normalized;
             transform.forward = Vector3.SmoothDamp(transform.forward, dirATarget, ref currentVelocity, smooth);
+            lineRenderer.SetPosition(1, transform.position + transform.forward * distanciaRayo);
             bool dentroDeRango = true;
             return dentroDeRango;
         }
@@ -80,12 +81,12 @@ public class Boss : MonoBehaviour
 
     void RayoBoss()
     {
-        if (Physics.Raycast(rayOrigin.position, rayDirection, out RaycastHit hitInfo, distanciaRayo))
+        if (Physics.Raycast(rayOrigin.position, transform.forward, out RaycastHit hitInfo, distanciaRayo))
         {                       
-                Debug.Log("Rayo alcanzó: " + hitInfo.collider.name);
-                Debug.Log("PlayerHit");
-            
+            Debug.Log("Rayo alcanzó: " + hitInfo.collider.name);
+            //lineRenderer.SetPosition(1, hitInfo.collider.transform.position);
+
         }
-        Debug.DrawRay(rayOrigin.position, rayDirection * distanciaRayo, Color.green);
+        Debug.DrawRay(rayOrigin.position, transform.forward * distanciaRayo, Color.green);
     }
 }
