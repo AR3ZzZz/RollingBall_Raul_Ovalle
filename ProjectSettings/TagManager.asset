@@ -11,6 +11,7 @@ TagManager:
   - JumpPad
   - BoostSlow
   - BoostSpeed
+  - Danho
   layers:
   - Default
   - TransparentFX

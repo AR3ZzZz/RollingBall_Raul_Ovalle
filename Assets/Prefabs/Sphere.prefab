@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 8018824364484701796}
   m_Layer: 0
   m_Name: Sphere
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -54,6 +54,8 @@ MonoBehaviour:
   puntosText: {fileID: 0}
   Direccion: {x: 0, y: 0, z: 1}
   distanciaRayo: 2.14
+  slowDuration: 0
+  speedDuration: 0
 --- !u!33 &757057224547630660
 MeshFilter:
   m_ObjectHideFlags: 0

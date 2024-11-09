@@ -72,11 +72,11 @@ public class Player : MonoBehaviour
     {
         if (speedX2)
         {
-            rb.AddForce(new Vector3(h, 0, v).normalized * fuerzaMov * 2, ForceMode.Acceleration);
+            rb.AddForce(new Vector3(h, 0, v).normalized * fuerzaMov * 2, ForceMode.Force);
         }
         else
         {
-            rb.AddForce(new Vector3(h, 0, v).normalized * fuerzaMov, ForceMode.Acceleration);
+            rb.AddForce(new Vector3(h, 0, v).normalized * fuerzaMov, ForceMode.Force);
         }
 
     }
@@ -86,7 +86,7 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             
-            rb.AddForce(new Vector3(0, 1, 0) * fuerzaSalto, ForceMode.VelocityChange);
+            rb.AddForce(new Vector3(0, 1, 0) * fuerzaSalto, ForceMode.Impulse);
             
         }
     }
