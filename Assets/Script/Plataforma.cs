@@ -67,13 +67,6 @@ public class Plataforma : MonoBehaviour
         }
         
     }
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Player")) 
-        {
-            audioManager.ReproducirSonido(sonidoPuntos);
-        }
-
-    }
+   
 
 }

@@ -7,7 +7,7 @@ public class Boss : MonoBehaviour
     [Header("Targeteo")]
     [SerializeField] float minDistance;
     [SerializeField] Transform target;
-    [SerializeField] bool batalla = true;
+    
     [SerializeField] float smooth;
 
     [Header("RayoBoss")]
@@ -18,13 +18,15 @@ public class Boss : MonoBehaviour
 
     
     private Vector3 currentVelocity;
+    [SerializeField] int vidas;
+    [SerializeField] GameManager gameManager;
 
-    public bool Batalla { get => batalla; set => batalla = value; }
+
 
     void Start()
     {
+        vidas = 4;
         lineRenderer = GetComponent<LineRenderer>();
-
         lineRenderer.positionCount = 2;
         lineRenderer.startWidth = 0.5f;
         lineRenderer.endWidth = 0.5f;
@@ -36,17 +38,11 @@ public class Boss : MonoBehaviour
     void Update()
     {
         DisparoActivo();
-        //RayoBoss();
-
-        //if (batalla)
-        //{
-        //    if (DisparoActivo())
-        //    {
-
-
-        //    }
-        //}
-
+       
+        if (vidas <= 0 ) 
+        {
+            gameManager.Win();
+        }
     }
     public bool DisparoActivo()
     {
@@ -71,21 +67,21 @@ public class Boss : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            batalla = true;
+            vidas--;
+            Destroy(other.gameObject);
         }
 
     }
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, minDistance);
-    }
+    
 
     void RayoBoss()
     {
         if (Physics.Raycast(rayOrigin.position, transform.forward, out RaycastHit hitInfo, minDistance))
-        {                       
-            hitInfo.transform.GetComponent<Player>().RecibirDanho(rayDmg);
+        {
+            if (hitInfo.transform.CompareTag("Player")) 
+            {
+                hitInfo.transform.GetComponent<Player>().RecibirDanho(rayDmg);                
+            }
         }
         Debug.DrawRay(rayOrigin.position, transform.forward * minDistance, Color.red);
     }

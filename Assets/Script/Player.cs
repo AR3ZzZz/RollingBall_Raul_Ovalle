@@ -10,15 +10,16 @@ public class Player : MonoBehaviour
     [SerializeField] int jumpadForce;
     [SerializeField] int movForce;
     [SerializeField] TMP_Text puntosText;
+    [SerializeField] TMP_Text vidasText;
     [SerializeField] GameManager gameManager;
     [SerializeField] Vector3 Direccion;
     [SerializeField] float RayDistance;
     [SerializeField] float slowDuration;
     [SerializeField] float speedDuration;
 
-    int generelDmg = 1;
+    int generalDmg = 1;
     int hp = 2;
-    int puntos;
+    [SerializeField] int puntos;
 
     Rigidbody rb;
 
@@ -33,14 +34,15 @@ public class Player : MonoBehaviour
     float timerSlow;
     float timerSpeed;
 
-    
+    public int Puntos { get => puntos; set => puntos = value; }
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         spawnPos = gameObject.transform.position;
         //rb.AddForce(Direccion * fuerzaMov, ForceMode.VelocityChange);
-
+        vidasText.SetText("HP: " + hp);
+        puntosText.SetText("Consumibles: " + puntos);
     }
 
     void Update()
@@ -99,7 +101,7 @@ public class Player : MonoBehaviour
         if (other.CompareTag("Coleccionable")) 
         {
          puntos += 1;
-         puntosText.SetText("Balas: " + puntos);
+         puntosText.SetText("Colectibles: " + puntos);
          Destroy(other.gameObject);    
         }
         if (other.CompareTag("Vacio"))
@@ -107,6 +109,7 @@ public class Player : MonoBehaviour
             rb.isKinematic = true;
             gameObject.transform.position = spawnPos;
             rb.isKinematic = false;
+            RecibirDanho(generalDmg);
         }
         if (other.CompareTag("BoostSlow"))
         {
@@ -125,11 +128,11 @@ public class Player : MonoBehaviour
         }
         if (other.CompareTag("Danho"))
         {
-            RecibirDanho(generelDmg);
+            RecibirDanho(generalDmg);
         }
         if (other.CompareTag("Bullet"))
         {
-            RecibirDanho(generelDmg);
+            RecibirDanho(generalDmg);
             Destroy(other.gameObject);
         }
 
@@ -140,6 +143,7 @@ public class Player : MonoBehaviour
         {
             rb.AddForce(new Vector3(0, 1, 0) * jumpadForce, ForceMode.VelocityChange);
         }
+        
     }
 
     bool DetectaSuelo()
@@ -151,11 +155,16 @@ public class Player : MonoBehaviour
 
     public void RecibirDanho(int x)
     {
-        hp -= x;
-        Muerte();
+        if (hp > 0)
+        {
+            hp -= x;
+            vidasText.SetText("HP: " + hp);
+            Muerte();
+        }
+        
     }
 
-    void Muerte()
+    public void Muerte()
     {
         if(hp <= 0)
         {

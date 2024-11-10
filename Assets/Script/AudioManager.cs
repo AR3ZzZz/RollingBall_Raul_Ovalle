@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
-    [SerializeField] AudioSource audioSourceSfx;
+    //[SerializeField] AudioSource audioSourceSfx;
 
-    public void ReproducirSonido(AudioClip clip)
-    {
+    //public void ReproducirSonido(AudioClip clip)
+    
         //1Time
-        audioSourceSfx.PlayOneShot(clip);
-    }
+        //audioSourceSfx.PlayOneShot(clip);
+    
 }

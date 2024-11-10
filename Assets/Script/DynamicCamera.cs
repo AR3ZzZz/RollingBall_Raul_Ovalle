@@ -17,7 +17,7 @@ public class DynamicCamera : MonoBehaviour
         {
             Vector3 middlePoint = (target1.position + target2.position) / 2;
             Vector3 cameraPos = middlePoint+ new Vector3 (0, CameraHeight, CameraDistance);
-            //transform.position = target1.position;
+            transform.position = target1.position;
             transform.position = Vector3.Lerp(transform.position, cameraPos, smooth);
             transform.LookAt(middlePoint);
         } 

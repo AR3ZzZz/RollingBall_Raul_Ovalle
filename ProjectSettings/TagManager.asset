@@ -12,6 +12,7 @@ TagManager:
   - BoostSlow
   - BoostSpeed
   - Danho
+  - Bullet
   layers:
   - Default
   - TransparentFX
