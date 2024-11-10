@@ -6,15 +6,18 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] int fuerzaSalto;
-    [SerializeField] int fuerzaPad;
-    [SerializeField] int fuerzaMov;
+    [SerializeField] int jumpHeight;
+    [SerializeField] int jumpadForce;
+    [SerializeField] int movForce;
     [SerializeField] TMP_Text puntosText;
+    [SerializeField] GameManager gameManager;
     [SerializeField] Vector3 Direccion;
-    [SerializeField] float distanciaRayo;
+    [SerializeField] float RayDistance;
     [SerializeField] float slowDuration;
     [SerializeField] float speedDuration;
 
+    int generelDmg = 1;
+    int hp = 2;
     int puntos;
 
     Rigidbody rb;
@@ -22,7 +25,7 @@ public class Player : MonoBehaviour
     float h;
     float v;    
 
-    Vector3 Inicio;
+    Vector3 spawnPos;
 
     bool slow = false;
     bool speedX2 = false;
@@ -35,7 +38,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        Inicio = gameObject.transform.position;
+        spawnPos = gameObject.transform.position;
         //rb.AddForce(Direccion * fuerzaMov, ForceMode.VelocityChange);
 
     }
@@ -72,11 +75,11 @@ public class Player : MonoBehaviour
     {
         if (speedX2)
         {
-            rb.AddForce(new Vector3(h, 0, v).normalized * fuerzaMov * 2, ForceMode.Force);
+            rb.AddForce(new Vector3(h, 0, v).normalized * movForce * 2, ForceMode.Force);
         }
         else
         {
-            rb.AddForce(new Vector3(h, 0, v).normalized * fuerzaMov, ForceMode.Force);
+            rb.AddForce(new Vector3(h, 0, v).normalized * movForce, ForceMode.Force);
         }
 
     }
@@ -86,7 +89,7 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             
-            rb.AddForce(new Vector3(0, 1, 0) * fuerzaSalto, ForceMode.Impulse);
+            rb.AddForce(new Vector3(0, 1, 0) * jumpHeight, ForceMode.Impulse);
             
         }
     }
@@ -95,14 +98,14 @@ public class Player : MonoBehaviour
     {
         if (other.CompareTag("Coleccionable")) 
         {
-         puntos += 3;
-         puntosText.SetText("Score: " + puntos);
+         puntos += 1;
+         puntosText.SetText("Balas: " + puntos);
          Destroy(other.gameObject);    
         }
         if (other.CompareTag("Vacio"))
         {
             rb.isKinematic = true;
-            gameObject.transform.position = Inicio;
+            gameObject.transform.position = spawnPos;
             rb.isKinematic = false;
         }
         if (other.CompareTag("BoostSlow"))
@@ -120,20 +123,44 @@ public class Player : MonoBehaviour
 
             Destroy(other.gameObject);
         }
+        if (other.CompareTag("Danho"))
+        {
+            RecibirDanho(generelDmg);
+        }
+        if (other.CompareTag("Bullet"))
+        {
+            RecibirDanho(generelDmg);
+            Destroy(other.gameObject);
+        }
+
     }
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("JumpPad"))
         {
-            rb.AddForce(new Vector3(0, 1, 0) * fuerzaPad, ForceMode.VelocityChange);
+            rb.AddForce(new Vector3(0, 1, 0) * jumpadForce, ForceMode.VelocityChange);
         }
     }
 
     bool DetectaSuelo()
     {
-        bool detectaSuelo = Physics.Raycast(gameObject.transform.position, Vector3.down, distanciaRayo);
+        bool detectaSuelo = Physics.Raycast(gameObject.transform.position, Vector3.down, RayDistance);
         Debug.DrawRay(gameObject.transform.position, Vector3.down, Color.red, 1f);
         return detectaSuelo;
+    }
+
+    public void RecibirDanho(int x)
+    {
+        hp -= x;
+        Muerte();
+    }
+
+    void Muerte()
+    {
+        if(hp <= 0)
+        {
+            gameManager.Lose();
+        }
     }
 
 }

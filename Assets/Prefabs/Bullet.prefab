@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &7354477529434554854
+--- !u!1 &2687386558411093399
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,68 +8,61 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 2696422510370469114}
-  - component: {fileID: 4817154951646430315}
-  - component: {fileID: 79836599513812555}
-  - component: {fileID: 6308218370940770473}
-  - component: {fileID: 4743581225139056986}
+  - component: {fileID: 7886487419689951635}
+  - component: {fileID: 6996487638778997193}
+  - component: {fileID: 4516328722896944948}
+  - component: {fileID: 2644827279381032475}
+  - component: {fileID: 1798892872174922876}
   m_Layer: 0
-  m_Name: Coleccionable
-  m_TagString: Coleccionable
+  m_Name: Bullet
+  m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &2696422510370469114
+--- !u!4 &7886487419689951635
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7354477529434554854}
+  m_GameObject: {fileID: 2687386558411093399}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.45320764, y: -0.32320803, z: -0.18666354, w: 0.8095037}
-  m_LocalPosition: {x: -1.64, y: 0.959, z: -4.65}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 52.62, y: 7.95, z: -51.92}
+  m_LocalScale: {x: 1.548, y: 1.548, z: 1.548}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 37.813, y: -61.226, z: -48.883}
---- !u!114 &4817154951646430315
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6996487638778997193
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7354477529434554854}
+  m_GameObject: {fileID: 2687386558411093399}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f33dee978820fe45856accf89a539ad, type: 3}
+  m_Script: {fileID: 11500000, guid: 145991cd527261f48a66993e37cf713f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fuerzaMov: 2
-  fuerzaRot: 90
-  tiempoReinicio: 1
-  direccion: {x: 0, y: 1, z: 0}
-  rotacion: {x: 0, y: 1, z: 0}
-  audioManager: {fileID: 3102557406020129778, guid: e5ca173a8ee620540b56a2c17ac9691a,
-    type: 3}
-  sonidoPuntos: {fileID: 8300000, guid: 0c4cc3d538f673b41ac73f5cf2ebb324, type: 3}
---- !u!33 &79836599513812555
+  velocidad: 35
+--- !u!33 &4516328722896944948
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7354477529434554854}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &6308218370940770473
+  m_GameObject: {fileID: 2687386558411093399}
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &2644827279381032475
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7354477529434554854}
+  m_GameObject: {fileID: 2687386558411093399}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -105,13 +98,13 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &4743581225139056986
-BoxCollider:
+--- !u!135 &1798892872174922876
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7354477529434554854}
+  m_GameObject: {fileID: 2687386558411093399}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -120,9 +113,9 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}

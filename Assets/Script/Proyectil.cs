@@ -5,6 +5,7 @@ using UnityEngine;
 public class Proyectil : MonoBehaviour
 {
     [SerializeField] float velocidad;
+    float timer = 10;
     
     void Start()
     {
@@ -14,6 +15,11 @@ public class Proyectil : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position += (transform.right * velocidad * Time.deltaTime);
+        timer -= Time.deltaTime;
+        transform.position += (transform.forward * velocidad * Time.deltaTime);
+        if (timer < 0)
+        {
+            Destroy(gameObject);//Optimizar 
+        }
     }
 }
